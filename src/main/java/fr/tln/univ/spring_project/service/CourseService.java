@@ -20,7 +20,7 @@ public class CourseService {
         Optional<Course> course1 = courseRepository.findByCode(course.getCode());
         if (course1.isPresent())
             throw new ConflictException("the code with the desired code is available in the system!");
-        return course1.get();
+        return courseRepository.save(course);
     }
 
     public Course findById(Long id){
