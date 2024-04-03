@@ -15,7 +15,7 @@ import java.util.Set;
 @Entity
 public class Student extends User{
     @Column(unique = true, nullable = false, updatable = false)
-    private int stdNumber;
+    private long stdNumber;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

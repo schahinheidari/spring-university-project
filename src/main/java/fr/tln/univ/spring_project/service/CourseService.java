@@ -31,14 +31,18 @@ public class CourseService {
         return optional.get();
     }
 
-    public Course update(Course course){
-        findById(course.getId());
-        return courseRepository.save(course);
+    public Course update(Course courseUpdate){
+        Course course = findById(courseUpdate.getId());
+        courseUpdate.setCode(course.getCode());
+        return courseRepository.save(courseUpdate);
     }
 
     public void deleteById(Long id){
         findById(id);
         courseRepository.deleteById(id);
+    }
+    public void deleteAll(){
+        courseRepository.deleteAll();
     }
 
     public List<Course> findAll(){

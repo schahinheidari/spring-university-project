@@ -1,6 +1,10 @@
 package fr.tln.univ.spring_project.controller;
 
+import fr.tln.univ.spring_project.dto.course.AddCourseDTO;
+import fr.tln.univ.spring_project.dto.course.UpdateCourseDTO;
+import fr.tln.univ.spring_project.dto.course.ViewCourseDTO;
 import fr.tln.univ.spring_project.entity.Course;
+import fr.tln.univ.spring_project.mapper.CourseMapper;
 import fr.tln.univ.spring_project.service.CourseService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,16 +17,17 @@ import java.util.List;
 @AllArgsConstructor
 public class CourseController {
     private final CourseService courseService;
+    private final CourseMapper mapper;
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Course save(@RequestBody Course course){
-        return courseService.save(course);
+    public Course save(@RequestBody AddCourseDTO addCourseDTO){
+        return courseService.save(mapper.toEntity(addCourseDTO));
     }
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public Course update(@RequestBody Course course){
-        return courseService.save(course);
+    public Course update(@RequestBody UpdateCourseDTO updateCourseDTO){
+        return courseService.save(mapper.toEntity(updateCourseDTO));
     }
     @DeleteMapping("/dalete/{}id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -31,8 +36,8 @@ public class CourseController {
     }
 
     @GetMapping("/find/{id}")
-    public Course findById(@PathVariable Long id){
-        return courseService.findById(id);
+    public ViewCourseDTO findById(@PathVariable Long id){
+        return mapper.toViewDto(courseService.findById(id));
     }
 
     @GetMapping("/list")

@@ -42,14 +42,20 @@ public class StudentService {
         return optional.get();
     }
 
-    public Student update(Student student){
-        findById(student.getId());
-        return studentRepository.save(student);
+    public Student update(Student studentUpdate){
+        Student student = findById(studentUpdate.getId());
+        studentUpdate.setNationalCode(student.getNationalCode());
+        studentUpdate.setUsername(student.getUsername());
+        return studentRepository.save(studentUpdate);
     }
 
     public void deleteById(Long id){
         findById(id);
         studentRepository.deleteById(id);
+    }
+
+    public void deleteall(){
+        studentRepository.deleteAll();
     }
 
     public List<Student> findAll(){
