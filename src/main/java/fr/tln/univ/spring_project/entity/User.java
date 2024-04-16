@@ -28,7 +28,7 @@ public class User extends BaseEntity{
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date birthDate;
+    private Date birthDay;
 
     @Column(nullable = false, unique = true, updatable = false)
     private String username;

@@ -26,15 +26,15 @@ public class SpringProjectApplication implements CommandLineRunner {
     public void run(String... args){
         if (courseService.findAll().isEmpty()) {
             courseService.deleteAll();
-            studentService.deleteall();
+            studentService.deleteAll();
 
 
             Student student1 = new Student();
             student1.setName("name1");
             student1.setFamily("family1");
             student1.setNationalCode(123456789L);
-            student1.setGender(Gender.MALE);
-            student1.setBirthDate(new Date());
+            student1.setGenderString(Gender.MALE);
+            student1.setBirthDayTimeStamp(new Date());
             student1.setUsername("userName1");
             student1.setPassword("password1");
             student1.setStdNumber(98765432L);

@@ -16,10 +16,10 @@ public class UpdateUserDTO extends UpdateBaseDTO {
     private String family;
 
     @NotBlank
-    private String gender;
+    private String genderString;
 
     @NotNull
-    private long birthDay;
+    private Long birthDayTimeStamp;
 
     @NotBlank
     private String password;

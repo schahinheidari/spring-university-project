@@ -1,6 +1,7 @@
 package fr.tln.univ.spring_project.mapper;
 
 import fr.tln.univ.spring_project.dto.course.AddCourseDTO;
+import fr.tln.univ.spring_project.dto.course.UpdateCourseDTO;
 import fr.tln.univ.spring_project.dto.course.ViewCourseDTO;
 import fr.tln.univ.spring_project.entity.Course;
 import fr.tln.univ.spring_project.entity.Student;
@@ -35,6 +36,10 @@ public class CourseMapper {
                 .collect(Collectors.toList());
         viewCourseDTO.setStudentNumbers(studentNumbers);
         return viewCourseDTO;
+    }
+
+    public List<ViewCourseDTO> toListViewDTO(List<Course> courseList){
+        return courseList.stream().map(this::toViewDto).toList();
     }
 
 }

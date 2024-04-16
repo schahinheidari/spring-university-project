@@ -1,7 +1,14 @@
 package fr.tln.univ.spring_project.controller;
 
 
+import fr.tln.univ.spring_project.dto.course.ViewCourseDTO;
+import fr.tln.univ.spring_project.dto.professor.AddProfessorDTO;
+import fr.tln.univ.spring_project.dto.professor.UpdateProfessorDTO;
+import fr.tln.univ.spring_project.dto.professor.ViewProfessorDTO;
+import fr.tln.univ.spring_project.entity.Course;
 import fr.tln.univ.spring_project.entity.Professor;
+import fr.tln.univ.spring_project.mapper.CourseMapper;
+import fr.tln.univ.spring_project.mapper.ProfessorMapper;
 import fr.tln.univ.spring_project.service.ProfessorService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,16 +21,20 @@ import java.util.List;
 @AllArgsConstructor
 public class ProfessorController {
     private final ProfessorService professorService;
+    private final ProfessorMapper professorMapper;
+    private final CourseMapper courseMapper;
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Professor save(@RequestBody Professor professor){
-        return professorService.save(professor);
+    public ViewProfessorDTO save(@RequestBody AddProfessorDTO addProfessorDTO){
+        Professor professor = professorService.save(professorMapper.toEntity(addProfessorDTO));
+        return professorMapper.toViewDto(professor);
     }
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public Professor update(@RequestBody Professor professor){
-        return professorService.save(professor);
+    public ViewProfessorDTO update(@RequestBody UpdateProfessorDTO updateProfessorDTO){
+        Professor professor = professorService.save(professorMapper.toEntity(updateProfessorDTO));
+        return professorMapper.toViewDto(professor);
     }
     @DeleteMapping("/dalete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -32,12 +43,18 @@ public class ProfessorController {
     }
 
     @GetMapping("/find/{id}")
-    public Professor findById(@PathVariable Long id){
-        return professorService.findById(id);
+    public ViewProfessorDTO findById(@PathVariable Long id){
+        return professorMapper.toViewDto(professorService.findById(id));
     }
 
     @GetMapping("/list")
-    public List<Professor> findAll(){
-        return professorService.findAll();
+    public List<ViewProfessorDTO> findAll(){
+        return professorMapper.toListViewDTO(professorService.findAll());
+    }
+
+    @GetMapping("/{codeProfessor}/course/list")
+    public List<ViewCourseDTO> listCoursesProfessor(@PathVariable int codeProfessor){
+        List<Course> courses = professorService.listCoursesProfessor(codeProfessor);
+        return courseMapper.toListViewDTO(courses);
     }
 }

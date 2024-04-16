@@ -1,6 +1,7 @@
 package fr.tln.univ.spring_project.service;
 
 
+import fr.tln.univ.spring_project.entity.Course;
 import fr.tln.univ.spring_project.entity.Student;
 import fr.tln.univ.spring_project.exception.ConflictException;
 import fr.tln.univ.spring_project.exception.NotFoundException;
@@ -54,7 +55,7 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public void deleteall(){
+    public void deleteAll(){
         studentRepository.deleteAll();
     }
 
@@ -62,10 +63,15 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student findByStdNumber(int stdNumber){
+    public Student findByStdNumber(Long stdNumber){
         Optional<Student> optional = studentRepository.findByStdNumber(stdNumber);
         if (optional.isEmpty())
             throw new NotFoundException("Student not found!");
         return optional.get();
+    }
+
+    public List<Course> listCoursesStudent(long stdNumber){
+        Student student = findByStdNumber(stdNumber);
+        return student.getCourses().stream().toList();
     }
 }

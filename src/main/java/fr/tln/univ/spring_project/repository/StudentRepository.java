@@ -8,5 +8,5 @@ import java.util.Optional;
 @Repository
 public interface StudentRepository extends UserRepository<Student>{
 
-    Optional<Student> findByStdNumber(int stdNumber);
+    Optional<Student> findByStdNumber(long stdNumber);
 }

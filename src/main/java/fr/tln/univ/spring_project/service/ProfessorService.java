@@ -1,6 +1,7 @@
 package fr.tln.univ.spring_project.service;
 
 
+import fr.tln.univ.spring_project.entity.Course;
 import fr.tln.univ.spring_project.entity.Professor;
 import fr.tln.univ.spring_project.exception.ConflictException;
 import fr.tln.univ.spring_project.exception.NotFoundException;
@@ -43,6 +44,13 @@ public class ProfessorService {
         return optional.get();
     }
 
+    public Professor findByCode(int code){
+        Optional<Professor> optional = professorRepository.findByCode(code);
+        if (optional.isEmpty()){
+            throw new NotFoundException("Professor Not Found!");
+        }
+        return optional.get();
+    }
     public Professor update(Professor professor){
         findById(professor.getId());
         return professorRepository.save(professor);
@@ -55,6 +63,11 @@ public class ProfessorService {
 
     public List<Professor> findAll(){
         return professorRepository.findAll();
+    }
+
+    public List<Course> listCoursesProfessor(int code){
+        Professor professor = findByCode(code);
+        return professor.getCourses().stream().toList();
     }
     
 }
