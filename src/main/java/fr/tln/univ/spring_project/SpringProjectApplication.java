@@ -33,8 +33,8 @@ public class SpringProjectApplication implements CommandLineRunner {
             student1.setName("name1");
             student1.setFamily("family1");
             student1.setNationalCode(123456789L);
-            student1.setGenderString(Gender.MALE);
-            student1.setBirthDayTimeStamp(new Date());
+            student1.setGender(Gender.MALE);
+            student1.setBirthDay(new Date());
             student1.setUsername("userName1");
             student1.setPassword("password1");
             student1.setStdNumber(98765432L);
