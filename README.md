@@ -71,6 +71,31 @@ Contains unit tests and integration tests.
 
 ### **Dockerfile**
 Used to build a Docker image of the project.
+Build the Docker Image:
+
+Run the following command to build the Docker image for the Spring Boot application:
+
+```
+docker build -t spring-project .
+```
+Start the Containers:
+
+Use Docker Compose to start both the Spring Boot application and the MySQL database:
+
+```
+docker-compose up
+```
+Access the Application:
+
+Once the containers are running, the Spring Boot application will be accessible at http://localhost:8080.
+
+Stop the Containers:
+
+To stop the containers, use the following command:
+
+```
+docker-compose down
+```
 
 ---
 
